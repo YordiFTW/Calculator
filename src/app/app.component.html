@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button {
+  background-color: gainsboro;
+  border: none;
+  color: Black;
+  padding: 20px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.textbox {
+
+  color: Black;
+  padding: 20px 32px;
+
+
+
+  font-size: 25px;
+
+
+
+}
+
+ table, th, td {
+  border: 1px solid black;
+  width: 555px;
+  text-align: center;
+}
+
+th, td, tr {
+  padding: 10px;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+</style>
+</head>
+<body>
+
+<h1>Yordi's Calculator</h1>
+<table frame=hsides rules=rows; >
+  <tr>
+    <td ><button style="background-color: skyblue;" (click) = "clear($event)" type="button" class="button" value="C">C</button></td>
+    
+    <td><p style = "font-size: 20px;">{{textBox2}}</p> <input type="text" id="username" disabled="true" name="username" value={{textBox1}}></td>
+    
+  </tr>
+</table>
+
+<table border= 1 frame=hsides rules=rows; >
+  <tr>
+    <th><button (click) = "showEvent($event)" type="button" class="button" value="7">7</button></th>
+      <th><button (click) = "showEvent($event)" type="button" class="button" value="8">8</button></th>
+      <th><button (click) = "showEvent($event)" type="button" class="button" value="9">9</button></th>
+      <th><button style="background-color: gray;" (click) = "operatorEvent($event)" type="button" class="button" value="+">+</button></th>
+    </tr>
+    <tr>
+      <td><button (click) = "showEvent($event)" type="button" class="button" value="4">4</button></td>
+      <td><button (click) = "showEvent($event)" type="button" class="button" value="5">5</button></td>
+      <td><button (click) = "showEvent($event)" type="button" class="button" value="6">6</button></td>
+      <td><button style="background-color: gray;"(click) = "operatorEvent($event)" type="button" class="button" value="-">-</button></td>
+    </tr>
+    <tr>
+      <td><button (click) = "showEvent($event)" type="button" class="button" >1</button></td>
+      <td><button (click) = "showEvent($event)" type="button" class="button" value="2">2</button></td>
+      <td><button (click) = "showEvent($event)" type="button" class="button" value="3">3</button></td>
+      <td><button  style="background-color: gray;"(click) = "operatorEvent($event)" type="button" class="button" value="*">*</button></td>
+    </tr>
+    <tr>
+      <td><button (click) = "DecimalPointEvent($event)" type="button" class="button" value=".">.</button></td>
+      <td><button (click) = "showEvent($event)" type="button" class="button" value="0">0</button></td>
+      <td><button style="background-color: limegreen;" (click) = "calculate($event)" type="button" class="button" value="=">=</button></td>
+      <td><button style="background-color: gray;" (click) = "operatorEvent($event)" type="button" class="button" value="/">/</button></td>
+      </tr>
+  </table>
+
+<h1>History</h1>
+  <ul>
+
+    <li *ngFor="let element of historyarray;">{{element}}</li>
+  </ul>

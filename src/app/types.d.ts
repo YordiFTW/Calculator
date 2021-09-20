@@ -1,0 +1,3 @@
+interface OldValue {
+    name: string;
+}
