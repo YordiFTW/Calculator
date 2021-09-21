@@ -82,8 +82,10 @@ th, td, tr {
   </table>
   <table frame=hsides rules=rows; >
     <tr>
-      <td ><button (click) = "ConvertToPlusOrMinus($event)" type="button" class="button" value="3">Convert Current Value to Minus/Plus Value</button></td>
-      
+      <td ><button style="background-color: gray;" (click) = "ConvertToPlusOrMinus($event)" type="button" class="button">+/-</button></td>
+      <td ><button style="background-color: gray;" (click) = "operatorEvent($event)" type="button" class="button">^</button></td>
+      <td ><button style="background-color: gray;" (click) = "root($event)" type="button" class="button">√</button></td>
+      <td ><button style="background-color: gray;" (click) = "percent($event)" type="button" class="button">%</button></td>
     </tr>
   </table>
   

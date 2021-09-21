@@ -15,6 +15,7 @@ export class AppComponent {
   title = 'Calculator';
   username: string = '';
   historyarray: string[] = [];
+  squared: number = 0;
  
 
 
@@ -70,7 +71,7 @@ export class AppComponent {
 
     if (this.textBox1 == 'Cannot devide by Zero')
     {
-        this.textBox1 = '-0';
+        this.textBox1 = '-0'; //Om NaN waardes te omzijlen.
     }
 
     else if(this.textBox1.indexOf('-') == 0)
@@ -88,7 +89,7 @@ export class AppComponent {
     const target = event.target as HTMLButtonElement;
     if(this.textBox1.includes('.'))
       {
-        
+        // doe niks, de waarde heeft al een decimale punt.
       }
       else
       {
@@ -103,9 +104,9 @@ export class AppComponent {
 
     
 
-    if(this.textBox1 == 'Cannot devide by Zero')
+    if(this.textBox1 == 'Cannot devide by Zero') 
     {
-      this.calc1 = '0';
+      this.calc1 = '0'; //om NaN waardes the verkomen wanneer iemand probeert door te rekenen met de 'Cannot devide by Zero' error.
     }
     else
     {
@@ -114,7 +115,8 @@ export class AppComponent {
     
     if( parseFloat(this.calc1) == 0)
     {
-
+      // als er nog geen getal ingevoerd is en dus nogsteeds nul is, dan werken the operator buttons niet, dit zorgt ervoor dat 
+      //de gebruiker geen onjuiste berekening kan invullen.
     }
     else
     {
@@ -133,12 +135,31 @@ export class AppComponent {
     this.textBox1 = '0';
     this.textBox2 = '';
     this.operator = '';
+    this.squared = 0;
   }
+
+  root(event : MouseEvent){
+    
+      this.calc1 = this.textBox1;
+      this.textBox2 = '√';
+      this.textBox1 = Math.sqrt(parseInt(this.calc1)).toString() ;
+      this.textBox2 += this.calc1 + '=' + this.textBox1;
+   
+     
+  }
+  percent(event : MouseEvent){
+    this.calc1 = this.textBox1;
+      
+      this.textBox1 = (parseInt(this.calc1) / 100).toString() ;
+      this.textBox2 = this.calc1 + '%' + '=' + this.textBox1;
+  }
+
+
 
   calculate(event : MouseEvent){
     if (this.operator == '')
     {
-
+      //doe niks, er is nog geen nieuwe berekening ingevuld.
     }
 
     else
@@ -158,6 +179,25 @@ export class AppComponent {
         this.textBox1 = (parseFloat(this.calc1) - parseFloat(this.calc2)).toString() ;
          break;   
       } 
+      case '^': { 
+        if (this.calc2.includes('-'))
+        {
+          this.textBox1 = '0';
+        }
+        else
+        {
+           this.squared = parseInt(this.calc1);
+           for(let n = 2; n <= parseInt(this.calc2); n++)
+           {
+             this.calc1 = (parseFloat(this.calc1) * this.squared).toString() ;
+          
+           }
+           this.textBox1 = this.calc1.toString();
+        }
+        
+         break;   
+
+      } 
       case '/': { 
         if (this.calc2 == '0')
         {
@@ -172,7 +212,13 @@ export class AppComponent {
      case '*': { 
       this.textBox1 = (parseFloat(this.calc1) * parseFloat(this.calc2)).toString() ; 
       break;   
+     }
+
+      case '%': { 
+        this.textBox1 = (parseFloat(this.calc1) / 100).toString() ; 
+        break; 
    } 
+   
       default: { 
          break; 
       } 
@@ -189,6 +235,7 @@ export class AppComponent {
     this.calc1 = '';
     this.calc2 = '';
     this.operator = '';
+    this.squared = 0;
   }
   }
 }
